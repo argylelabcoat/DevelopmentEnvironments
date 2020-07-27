@@ -58,10 +58,13 @@ fish -c nvm < ~/.nvmrc && \
 go get golang.org/x/tools/gopls@latest && \ 
 \
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
-nvim -E   +PlugInstall +qall || echo "installed plugins" && \
-\
-bash -c "source /usr/local/lib/yottadb/r128/ydb_env_set" && \
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+nvim -E   +PlugInstall +qall || echo "installed plugins"  && \
+bash -c "source /usr/local/lib/yottadb/r128/ydb_env_set" 
+RUN wget https://sh.rustup.rs -O rustup.sh && \
+cat rustup.sh && \
+chmod +x rustup.sh && \
+./rustup.sh -y && \
+rm rustup.sh
 
 
 WORKDIR /work
