@@ -12,13 +12,13 @@ USER := $(shell id -u)
 
 all:
 
-debian:
-	$(BUILDER) $(BUILD_CMD) -t goyotta:debian -f goyotta.Dockerfile  --build-arg USER_ID=$(USER) --build-arg GROUP_ID=$(GROUP) .
+ubuntu:
+	$(BUILDER) $(BUILD_CMD) -t goyotta:ubuntu -f goyotta.Dockerfile  --build-arg USER_ID=$(USER) --build-arg GROUP_ID=$(GROUP) .
 
-debian-buildah:
-	BUILDER=buildah BUILD_CMD=build-using-dockerfile make debian
-debian-podman:
-	BUILDER=podman make debian
+buildah:
+	BUILDER=buildah BUILD_CMD=build-using-dockerfile make ubuntu 
+podman:
+	BUILDER=podman make ubuntu
 
 run:
-	$(BUILDER) run --rm -it -v $(PWD):/work:z goyotta:debian 
+	$(BUILDER) run --rm -it --name DevEnvironment --hostname devenv -v $(PWD):/work:z goyotta:ubuntu
