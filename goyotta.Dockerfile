@@ -38,7 +38,7 @@ RUN mkdir -p /home/user/.config/fish && \
 mkdir -p /home/user/.config/nvim && \
 mkdir -p /home/user/.config/tmux
 
-
+ENV TERM=screen-256color
 ENV GO111MODULE=on  LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
 ENV PATH=$PATH:/usr/local/go/bin:/home/user/go/bin
@@ -61,10 +61,9 @@ RUN chown -R user:user /home/user
 
 USER user
 
-RUN $HOME/yotta_config
+#RUN $HOME/yotta_config
 
 RUN wget https://sh.rustup.rs -O rustup.sh && \
-cat rustup.sh && \
 chmod +x rustup.sh && \
 fish -c "./rustup.sh -y" && \
 rm rustup.sh
@@ -82,7 +81,6 @@ pip3 install --user pyls meson conan pylint prospector scons tmuxp && \
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
 nvim -E   +PlugInstall +qall || echo "installed plugins" 
 
-ENV TERM=screen-256color
 WORKDIR /work
 
 CMD fish -c tmux

@@ -18,7 +18,11 @@ ubuntu:
 buildah:
 	BUILDER=buildah BUILD_CMD=build-using-dockerfile make ubuntu 
 podman:
-	BUILDER=podman make ubuntu
+	podman pull docker.io/library/ubuntu:focal
+	BUILDER="podman  --cgroup-manager=cgroupfs" make ubuntu
 
 run:
 	$(BUILDER) run --rm -it --name DevEnvironment --hostname devenv -v $(PWD):/work:z goyotta:ubuntu
+
+run-podman:
+	BUILDER="podman" make run
