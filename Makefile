@@ -9,6 +9,7 @@ BUILD_CMD ?= build
 
 GROUP := $(shell id -g)
 USER := $(shell id -u)
+TZ:= $(shell readlink /etc/localtime )
 
 all:
 
@@ -22,7 +23,7 @@ podman:
 	BUILDER="podman  --cgroup-manager=cgroupfs" make ubuntu
 
 run:
-	$(BUILDER) run --rm -it --name DevEnvironment --hostname devenv -v $(PWD):/work:z goyotta:ubuntu
+	$(BUILDER) run --rm -it --name DevEnvironment --hostname devenv -v $(PWD):/work:z -e TZ=$(TZ) goyotta:ubuntu
 
 run-podman:
 	BUILDER="podman" make run
