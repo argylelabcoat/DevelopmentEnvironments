@@ -21,9 +21,10 @@ nnoremap <A-l> <C-w>l
 "Split panel
 nnoremap <leader>v <C-w>v
 nnoremap <leader>s <C-w>s
-"Map yanked to clipboard
+"Map yanked to middle-click clipboard
 vnoremap <C-c> "*y
 
+nmap <Leader><Space> :noh<CR>
 
 nmap <F8> :TagbarToggle<CR> 
 

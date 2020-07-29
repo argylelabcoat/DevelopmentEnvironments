@@ -18,12 +18,24 @@ let g:LanguageClient_serverCommands = {
     \ 'go': ['$HOME/go/bin/gopls'],
     \ 'cpp': ['clangd'],
     \ 'python': ['pyls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'typescript.tsx': ['javascript-typescript-stdio'], 
     \ }
+
 let $RUST_BACKTRACE = 1
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_virtualTextPrefix = ''
 let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
 let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
+
+" Root Markers for Language Client
+let g:LanguageClient_rootMarkers = {
+    \ 'javascript': ['jsconfig.json'],
+    \ 'typescript': ['tsconfig.json'],
+    \ }
+
 
 
 
