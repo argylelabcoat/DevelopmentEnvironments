@@ -21,10 +21,9 @@ nnoremap <A-l> <C-w>l
 "Split panel
 nnoremap <leader>v <C-w>v
 nnoremap <leader>s <C-w>s
-"Map yanked to middle-click clipboard
+"Map yanked to clipboard
 vnoremap <C-c> "*y
 
-nmap <Leader><Space> :noh<CR>
 
 nmap <F8> :TagbarToggle<CR> 
 
@@ -42,10 +41,15 @@ set smartcase
 set incsearch
 set hidden
 
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" deoplete keys
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
 "Load up my various Plugin Configs:
 source $HOME/.config/nvim/tree.vim
 source $HOME/.config/nvim/lang.vim
-source $HOME/.config/nvim/coc.vim
 source $HOME/.config/nvim/commenter.vim
 source $HOME/.config/nvim/status.vim
 source $HOME/.config/nvim/search.vim
