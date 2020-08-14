@@ -1,9 +1,8 @@
 #!/bin/bash
-yottadb -r GDE 
-mupip CREATE -REGION=default
-mupip set -region -journal=on,nobefore "*"
-mupip SET -REGION -ACCESS_METHOD=MM "*"
-# mupip SET -REGION -RES=2048 "*"
-mupip SET -REGION -G=100000 "*"
-# mupip SET -REGION -FLUSH_TIME=0:0:30 "*"
-mupip EXTEND DEFAULT -BLOCKS=65535 
+cd /$HOME/scripts
+yottadb -r GDE @yottadb.gde
+mupip CREATE
+mupip set -ACCESS_METHOD=MM  -region "*"
+mupip SET  -G=100000 -region "*"
+mupip journal -recover -forward "*"
+mupip set -journal=ENABLE,on,nobefore -region "*"

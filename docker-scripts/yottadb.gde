@@ -1,0 +1,4 @@
+change -segment DEFAULT -file="$ydb_global_dir/default.gde" -access_method=BG -allocation=1048576  -block_size=4096 -lock_space=1000 -global_buffer_count=8192 -extension_count=25600
+change -region  DEFAULT -record_size=4096 -stdnullcoll -key_size=512
+show -all
+EXIT

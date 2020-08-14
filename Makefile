@@ -23,7 +23,7 @@ podman:
 	BUILDER="podman  --cgroup-manager=cgroupfs" make ubuntu
 
 run:
-	$(BUILDER) run --rm -it --name DevEnvironment --hostname devenv -v $(PWD):/work:z -e TZ=$(TZ) goyotta:ubuntu
+	$(BUILDER) run --rm -it --name DevEnvironment --hostname devenv -v $(PWD):/work:z -e TZ=$(TZ) goyotta:ubuntu /home/user/scripts/run_shell.sh
 
 run-podman:
 	BUILDER="podman" make run
