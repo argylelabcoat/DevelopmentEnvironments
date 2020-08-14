@@ -61,6 +61,8 @@ wget https://sh.rustup.rs -O rustup.sh && \
 chmod +x rustup.sh && \
 zsh -c "./rustup.sh -y" && \
 rm rustup.sh && \
+# Starship
+cargo install starship && \
 # Go Tools
 go get golang.org/x/tools/gopls@latest && \ 
 go get github.com/go-delve/delve/cmd/dlv && \
