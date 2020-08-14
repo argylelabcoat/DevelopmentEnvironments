@@ -3,7 +3,7 @@ FROM ubuntu:focal
 RUN apt update;  DEBIAN_FRONTEND="noninteractive" \
 apt install -y libicu-dev icu-devtools libtinfo5 \
 build-essential binutils pkgconf clang clangd lldb gdb gdbserver gcc \
-wget file procps gzip tar grep gawk \
+wget file procps gzip tar grep gawk libssl-dev \
 # Development Utils:
 neovim emacs-nox kakoune curl git fossil tig tmux zsh unzip universal-ctags python3-pip 
 
@@ -72,6 +72,7 @@ pip3 install --user pyls meson conan pylint prospector scons pynvim msgpack-pyth
 USER root
 
 COPY docker-scripts/tmux.conf ./.tmux.conf
+COPY docker-scripts/tmux.conf.local ./.tmux.conf.local
 COPY docker-scripts/nvmrc .nvmrc
 
 
