@@ -16,6 +16,9 @@ all:
 ubuntu:
 	$(BUILDER) $(BUILD_CMD) -t goyotta:ubuntu -f goyotta.Dockerfile  --build-arg USER_ID=$(USER) --build-arg GROUP_ID=$(GROUP) .
 
+nix:
+	$(BUILDER) $(BUILD_CMD) -t mattenv:nix -f nix.Dockerfile  --build-arg USER_ID=$(USER) --build-arg GROUP_ID=$(GROUP) .
+
 buildah:
 	BUILDER=buildah BUILD_CMD=build-using-dockerfile make ubuntu 
 podman:
