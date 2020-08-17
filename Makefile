@@ -7,17 +7,20 @@ BUILDER ?= docker
 BUILD_CMD ?= build
 
 
-GROUP := $(shell id -g)
-USER := $(shell id -u)
+GID := $(shell id -g)
+UID := $(shell id -u)
 TZ:= $(shell readlink /etc/localtime )
 
 all:
 
 ubuntu:
-	$(BUILDER) $(BUILD_CMD) -t goyotta:ubuntu -f goyotta.Dockerfile  --build-arg USER_ID=$(USER) --build-arg GROUP_ID=$(GROUP) .
+	$(BUILDER) $(BUILD_CMD) -t goyotta:ubuntu -f goyotta.Dockerfile  --build-arg USER_ID=$(UID) --build-arg GROUP_ID=$(GID) .
 
 nix:
-	$(BUILDER) $(BUILD_CMD) -t mattenv:nix -f nix.Dockerfile  --build-arg USER_ID=$(USER) --build-arg GROUP_ID=$(GROUP) .
+	$(BUILDER) $(BUILD_CMD) -t mattenv:nix -f nix.Dockerfile  --build-arg USER=$(USER) --build-arg UID=$(UID) --build-arg GID=$(GID) .
+
+run-nix:
+	$(BUILDER) run --rm -it --name NixDev --hostname nixdev mattenv:nix
 
 buildah:
 	BUILDER=buildah BUILD_CMD=build-using-dockerfile make ubuntu 
