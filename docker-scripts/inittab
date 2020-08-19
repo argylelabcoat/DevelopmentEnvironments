@@ -1,0 +1,11 @@
+# GUIX INIT
+# ~root/.config/guix/current/bin/guix-daemon \
+# --build-users-group=guixbuild
+#
+# sh
+
+::sysinit:/etc/init.d/rcS
+
+# ::sysinit:~root/.config/guix/current/bin/guix-daemon --build-users-group=guixbuild
+
+::askfirst:-/bin/sh

@@ -22,8 +22,15 @@ nix:
 run-nix:
 	$(BUILDER) run --rm -it --name NixDev --hostname nixdev mattenv:nix
 
+guix-base:
+	$(BUILDER) build -f alpine-guix.Dockerfile -t mattdev:guix .
+
+run-guix:
+	$(BUILDER) run --rm -it --name GuixDev --hostname guixdev  mattdev:guix
+
 buildah:
 	BUILDER=buildah BUILD_CMD=build-using-dockerfile make ubuntu 
+
 podman:
 	podman pull docker.io/library/ubuntu:focal
 	BUILDER="podman  --cgroup-manager=cgroupfs" make ubuntu
