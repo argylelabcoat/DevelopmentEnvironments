@@ -5,4 +5,5 @@ mkdir -p /data/yottadb/r
 mkdir -p /data/yottadb/o
 
 $HOME/scripts/yotta_config
+$HOME/scripts/zpluginstall.zsh
 tmux

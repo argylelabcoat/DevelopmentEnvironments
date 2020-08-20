@@ -45,21 +45,12 @@ RUN \
             guixbuilder$i; \
   done
 
-RUN echo "#!/bin/sh" > /etc/init.d/rcS; \
-echo "/root/.config/guix/current/bin/guix-daemon --build-users-group=guixbuild &" >> /etc/init.d/rcS; \
-echo "alias shutdown='kill 1'" >> /etc/init.d/rcS; \
-chmod +x /etc/init.d/rcS
+RUN echo "#! /bin/sh" > /root/init.sh; \
+echo "~root/.config/guix/current/bin/guix-daemon --build-users-group=guixbuild &" >> /root/init.sh; \
+echo "exec \"\$@\"" >> /root/init.sh; \ 
+chmod +x /root/init.sh
 
-RUN echo "::sysinit:/etc/init.d/rcS " > /etc/inittab; \
-echo "::askfirst:-/bin/bash" >> /etc/inittab
+RUN /root/init.sh guix pull; guix package -u
 
-RUN echo "alias shutdown='kill 1'" >> /etc/bashrc; \
-chmod +x /etc/bashrc
-
-# RUN alias shutdown="kill 1"
-# CMD [ "bash", "-c", "~root/.config/guix/current/bin/guix-daemon \
-       # --build-users-group=guixbuild"]
-ENV HOME=/root
-ENV TERM=xterm
-ENTRYPOINT ["busybox", "init"]
-
+ENTRYPOINT ["/root/init.sh"]
+CMD ["/bin/bash"]

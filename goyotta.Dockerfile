@@ -3,7 +3,7 @@ FROM ubuntu:focal
 RUN apt update;  DEBIAN_FRONTEND="noninteractive" \
 apt install -y libicu-dev icu-devtools libtinfo5 \
 build-essential binutils pkgconf clang clangd lldb gdb gdbserver gcc \
-wget file procps gzip tar grep gawk libssl-dev \
+wget file procps gzip tar grep gawk libssl-dev locales \
 # Development Utils:
 neovim emacs-nox kakoune curl git fossil tig tmux zsh unzip universal-ctags python3-pip 
 
@@ -78,7 +78,7 @@ COPY docker-scripts/nvmrc .nvmrc
 
 COPY docker-scripts/nvim .config/nvim
 
-COPY docker-scripts/zsh-bootstrap.sh ./scripts/zsh-bootstrap.sh
+COPY docker-scripts/zshrc /home/user/.zshrc
 COPY docker-scripts/run_shell.sh ./scripts/run_shell.sh
 COPY docker-scripts/yotta_config ./scripts/yotta_config
 COPY docker-scripts/yottadb.gde ./scripts/yottadb.gde
@@ -92,7 +92,8 @@ USER user
 
 #RUN $HOME/yotta_config
 RUN \
-zsh -c /home/user/scripts/zsh-bootstrap.sh && \
+locale-gen en_US.UTF-8 && \
+git clone https://github.com/zplug/zplug.git $HOME/.zplug && \
 zsh -c "npm install -g javascript-typescript-langserver" && \
 \
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && \
